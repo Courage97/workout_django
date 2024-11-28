@@ -1,0 +1,57 @@
+{% load static  %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness tracker</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="#" class="logo">
+                🏃‍♂️ FitTrack
+            </a>
+        </div>
+    </nav>
+
+    <div class="registration-container">
+        <div class="registration-card">
+            <div class="registration-header">
+                <h1>Login to your account</h1>
+                <p>Start your fitness journey today</p>
+            </div>
+
+            <form action="" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="fullname">Username</label>
+                    <input type="text" id="fullname" name="username" required 
+                           placeholder="Enter your Username">
+                    <span class="error-message">Please enter your Username</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required 
+                           minlength="8" placeholder="Create a password">
+                </div>
+
+                <button type="submit" class="btn btn-primary">login</button>
+            </form>
+
+            <div class="login-link">
+                Don't have an account <a href="{% url 'register'%}">Register</a>
+            </div>
+        </div>
+        {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li class="{{ message.tags }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+{% endif %}
+    </div>
+</body>
+</html>

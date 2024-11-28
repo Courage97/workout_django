@@ -1,0 +1,74 @@
+{% load static  %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness tracker</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-content">
+            <a href="#" class="logo">
+                🏃‍♂️ FitTrack
+            </a>
+        </div>
+    </nav>
+
+    <div class="registration-container">
+        <div class="registration-card">
+            <div class="registration-header">
+                <h1>Create your account</h1>
+                <p>Start your fitness journey today</p>
+            </div>
+
+            <form action="" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="fullname">Username</label>
+                    <input type="text" id="fullname" name="username" required placeholder="Enter your Username">
+                    <span class="error-message">Please enter your Username</span>
+                </div>
+            
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" required placeholder="Enter your email">
+                    <span class="error-message">Please enter a valid email address</span>
+                </div>
+            
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required minlength="8" placeholder="Create a password">
+                    <div class="password-strength">Password strength: Make it at least 8 characters</div>
+                    <span class="error-message">Password must be at least 8 characters</span>
+                </div>
+                <div class="form-group">
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" id="confirm-password" name="password2" required minlength="8" placeholder="Confirm password">
+                </div>
+            
+                <div class="checkbox-group">
+                    <input type="checkbox" id="terms" name="terms" required>
+                    <label for="terms">I agree to the Terms of Service and Privacy Policy</label>
+                </div>
+            
+                <button type="submit" class="btn btn-primary">Create Account</button>
+            </form>
+            
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li class="{{ message.tags }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            
+
+            <div class="login-link">
+                Already have an account? <a href="{% url 'login'%}">Log in</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
